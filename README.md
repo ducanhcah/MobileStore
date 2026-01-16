@@ -1,32 +1,29 @@
-MobileStore Flagship - Cửa hàng điện thoại trực tuyến
-Dự án website bán lẻ điện thoại di động được xây dựng bằng ASP.NET Core 10.0 MVC. Website có giao diện hiện đại, hỗ trợ quản lý sản phẩm, danh mục và giỏ hàng.
-
-Tính năng chính
-Trang chủ: Hiển thị Banner quảng cáo và các sản phẩm nổi bật.
-Chi tiết sản phẩm: Xem thông số kỹ thuật, giá bán và hình ảnh chất lượng cao.
-Danh mục: Phân loại điện thoại theo hãng (iPhone, Samsung, Xiaomi...).
-Giỏ hàng: Thêm/Xóa sản phẩm, cập nhật số lượng và tính tổng tiền.
-Xác thực: Hệ thống Đăng ký/Đăng nhập dành cho người dùng (Sắp ra mắt).
+MobileStore
+Website bán hàng điện thoại di động được xây dựng bằng kiến trúc ASP.NET Core MVC.
 
 Công nghệ sử dụng
-Back-end: .NET 8.0, ASP.NET Core MVC.
-Database: SQL Server (Server Name: Kirai).
-ORM: Entity Framework Core.
-Front-end: Bootstrap 5, FontAwesome, CSS3 (Glassmorphism design).
+Framework: .NET 10.0 (ASP.NET Core MVC)
+Database: SQL Server
+ORM: Entity Framework Core
+Giao diện: Bootstrap 5, CSS3, FontAwesome
+
+Các tính năng chính
+Trang chủ: Hiển thị Banner và danh sách sản phẩm nổi bật.
+Danh mục sản phẩm: Phân loại điện thoại theo hãng sản xuất.
+Chi tiết sản phẩm: Xem thông tin cấu hình, mô tả và giá bán.
+Giỏ hàng: Thêm, xóa và cập nhật số lượng sản phẩm.
+Tìm kiếm: Tìm kiếm sản phẩm theo tên.
+Xác thực: Đăng ký, đăng nhập người dùng (Identity).
 
 Hướng dẫn cài đặt
-1. Yêu cầu hệ thống
-Đã cài đặt .NET 8.0 SDK.
-SQL Server đang hoạt động (Instance name: Kirai).
-2. Cấu hình Database
-Mở file appsettings.json và kiểm tra chuỗi kết nối:
-JSON
-"DefaultConnection": "Server=Kirai;Database=MobileStoreDB;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True"
-3. Chạy lệnh Migration
-Mở Terminal tại thư mục dự án và thực hiện lệnh sau để tạo cấu trúc bảng:
-Bash
-dotnet ef database update
-4. Khởi chạy ứng dụng
-Bash
-dotnet run
-Sau đó truy cập: http://localhost:5000
+Clone dự án: git clone https://github.com/ducanhcah/MobileStore.git
+Cấu hình chuỗi kết nối Database trong file appsettings.json.
+Cập nhật cơ sở dữ liệu (Migration): dotnet ef database update
+Chạy dự án: dotnet run
+
+Cấu trúc thư mục
+Controllers: Xử lý logic điều hướng và yêu cầu.
+Models: Định nghĩa cấu trúc dữ liệu sản phẩm, danh mục, giỏ hàng.
+Views: Giao diện người dùng (Razor Pages).
+Data: Cấu hình DbContext và Seed Data.
+wwwroot: Chứa các tệp tĩnh như hình ảnh, CSS và JavaScript.
