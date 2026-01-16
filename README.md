@@ -16,7 +16,7 @@
 <h3>2. Chức năng hệ thống</h3>
 <table width="100%">
   <tr>
-    <td><b>Người dùng</b></td>
+    <td width="30%"><b>Người dùng</b></td>
     <td>Xem sản phẩm, Chi tiết sản phẩm, Tìm kiếm, Giỏ hàng</td>
   </tr>
   <tr>
@@ -30,20 +30,28 @@
 </table>
 
 <h3>3. Hướng dẫn triển khai</h3>
-<pre>
-# 1. Tải mã nguồn
-git clone https://github.com/ducanhcah/MobileStore.git
-
-# 2. Cấu hình Database
-Mở appsettings.json và chỉnh sửa ConnectionStrings:
-"DefaultConnection": "Server=Kirai;Database=MobileStoreDB;..."
-
-# 3. Tạo bảng dữ liệu
-dotnet ef database update
-
-# 4. Chạy ứng dụng
-dotnet run
-</pre>
+<table width="100%">
+  <tr>
+    <th align="left" width="30%">Bước thực hiện</th>
+    <th align="left">Lệnh / Thao tác</th>
+  </tr>
+  <tr>
+    <td><b>1. Tải mã nguồn</b></td>
+    <td><code>git clone https://github.com/ducanhcah/MobileStore.git</code></td>
+  </tr>
+  <tr>
+    <td><b>2. Cấu hình Database</b></td>
+    <td>Chỉnh sửa <code>DefaultConnection</code> trong <code>appsettings.json</code> khớp với Server SQL của bạn</td>
+  </tr>
+  <tr>
+    <td><b>3. Khởi tạo dữ liệu</b></td>
+    <td>Chạy lệnh <code>dotnet ef database update</code> để tạo bảng</td>
+  </tr>
+  <tr>
+    <td><b>4. Khởi chạy</b></td>
+    <td>Dùng lệnh <code>dotnet run</code> và truy cập <code>localhost:5000</code></td>
+  </tr>
+</table>
 
 <h3>4. Cấu trúc thư mục</h3>
 <ul>
