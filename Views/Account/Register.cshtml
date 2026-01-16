@@ -1,0 +1,41 @@
+@{
+    ViewData["Title"] = "Đăng Ký";
+}
+
+<div class="d-flex align-items-center justify-content-center min-vh-100" style="background: url('https://images.unsplash.com/photo-1556656793-02715d8dd6f8?q=80&w=2670&auto=format&fit=crop') no-repeat center center; background-size: cover;">
+    <div class="card border-0 shadow-lg p-4 glassmorphism" style="width: 100%; max-width: 450px; backdrop-filter: blur(15px); background: rgba(255, 255, 255, 0.85);">
+        <div class="card-body">
+            <h3 class="text-center fw-bold mb-4 text-dark">Tạo tài khoản mới</h3>
+            <form asp-action="Register" method="post">
+                 <div asp-validation-summary="ModelOnly" class="text-danger small mb-3"></div>
+                 <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold text-muted">Họ và tên</label>
+                    <input type="text" name="fullName" class="form-control rounded-pill px-3 py-2 bg-white border-0 shadow-sm" placeholder="Nguyễn Văn A" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold text-muted">Email</label>
+                    <input type="email" name="email" class="form-control rounded-pill px-3 py-2 bg-white border-0 shadow-sm" placeholder="name@example.com" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label fw-semibold text-muted">Mật khẩu</label>
+                    <input type="password" name="password" class="form-control rounded-pill px-3 py-2 bg-white border-0 shadow-sm text-dark" required>
+                </div>
+                 <div class="mb-4">
+                    <label class="form-label fw-semibold text-muted">Nhập lại mật khẩu</label>
+                    <input type="password" name="confirmPassword" class="form-control rounded-pill px-3 py-2 bg-white border-0 shadow-sm" required>
+                </div>
+                
+                <button type="submit" class="btn btn-primary w-100 rounded-pill py-2 fw-bold shadow-sm hover-scale">Đăng Ký</button>
+            </form>
+            
+            <div class="mt-4 text-center">
+                <span class="text-muted small">Đã có tài khoản? </span>
+                <a asp-action="Login" class="text-dark fw-bold text-decoration-none">Đăng nhập</a>
+            </div>
+        </div>
+    </div>
+</div>

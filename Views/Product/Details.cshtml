@@ -1,0 +1,99 @@
+@model MobileStore.Models.Product
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="container mt-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-5">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index" class="text-decoration-none text-muted">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a asp-controller="Product" asp-action="Index" class="text-decoration-none text-muted">@Model.Category?.Name</a></li>
+            <li class="breadcrumb-item active fw-bold" aria-current="page">@Model.Name</li>
+        </ol>
+    </nav>
+
+    <div class="row g-5">
+        <!-- Product Images -->
+        <div class="col-lg-6">
+            <div class="card border-0 rounded-5 shadow-sm bg-light-subtle overflow-hidden position-sticky" style="top: 100px;">
+                <div class="p-5 d-flex align-items-center justify-content-center">
+                    <img src="@Model.ImageUrl" class="img-fluid" alt="@Model.Name" style="max-height: 500px; transform: scale(1.1); transition: transform 0.5s;">
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Info -->
+        <div class="col-lg-6">
+            <div class="ps-lg-4">
+                <span class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill mb-3 px-3 py-2 fw-semibold">@Model.Category?.Name</span>
+                
+                <h1 class="display-4 fw-bold mb-3">@Model.Name</h1>
+                
+                <div class="d-flex align-items-center mb-4">
+                    <div class="text-warning small me-2">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-half"></i>
+                    </div>
+                    <span class="text-muted small">(4.8/5 đánh giá)</span>
+                </div>
+
+                <h2 class="display-5 text-primary fw-bold mb-4">@Model.Price.ToString("N0") đ</h2>
+                
+                <p class="text-muted fs-5 lh-lg mb-5">@Model.Description</p>
+                
+                <!-- Mock Variants -->
+                <div class="mb-5">
+                    <label class="form-label fw-bold mb-3 text-secondary text-uppercase small ls-1">Chọn Màu Sắc</label>
+                    <div class="d-flex gap-3">
+                         <div class="rounded-circle border border-2 border-primary position-relative" style="width: 40px; height: 40px; background: #333; cursor: pointer;"></div>
+                         <div class="rounded-circle border border-1 position-relative" style="width: 40px; height: 40px; background: #f0f0f0; cursor: pointer;"></div>
+                         <div class="rounded-circle border border-1 position-relative" style="width: 40px; height: 40px; background: #1B3F8B; cursor: pointer;"></div>
+                         <div class="rounded-circle border border-1 position-relative" style="width: 40px; height: 40px; background: #F5EFEB; cursor: pointer;"></div>
+                    </div>
+                    <div class="text-muted small mt-2">Titan Đen, Titan Trắng, Titan Xanh, Titan Tự Nhiên</div>
+                </div>
+                 
+                 <div class="mb-5">
+                     <label class="form-label fw-bold mb-3 text-secondary text-uppercase small ls-1">Dung Lượng</label>
+                      <div class="d-flex gap-2">
+                        <button class="btn btn-outline-dark rounded-pill px-4 active">256GB</button>
+                        <button class="btn btn-outline-dark rounded-pill px-4">512GB</button>
+                        <button class="btn btn-outline-dark rounded-pill px-4">1TB</button>
+                    </div>
+                 </div>
+
+                <!-- Action Form -->
+                <form asp-controller="Cart" asp-action="AddToCart" method="post" class="d-flex gap-3 pt-3 border-top">
+                    <input type="hidden" name="productId" value="@Model.Id" />
+                    
+                    <div class="input-group" style="width: 140px;">
+                        <button class="btn btn-light border" type="button" onclick="this.parentNode.querySelector('input[type=number]').stepDown()"><i class="bi bi-dash"></i></button>
+                        <input type="number" name="quantity" class="form-control text-center border-top border-bottom" value="1" min="1" max="@Model.StockQuantity">
+                        <button class="btn btn-light border" type="button" onclick="this.parentNode.querySelector('input[type=number]').stepUp()"><i class="bi bi-plus"></i></button>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-lg rounded-pill flex-grow-1 shadow-lg hover-scale" @(Model.StockQuantity > 0 ? "" : "disabled")>
+                        <i class="bi bi-cart-plus me-2"></i> @(Model.StockQuantity > 0 ? "Thêm vào giỏ" : "Hết hàng")
+                    </button>
+                </form>
+                
+                 <div class="mt-4 d-flex gap-4 text-muted small">
+                     <span><i class="bi bi-check-circle text-success me-1"></i> Còn hàng: @Model.StockQuantity</span>
+                     <span><i class="bi bi-shield-check text-success me-1"></i> Bảo hành 12 tháng</span>
+                     <span><i class="bi bi-arrow-return-left text-success me-1"></i> Đổi trả 30 ngày</span>
+                 </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Related Products Placeholder -->
+    <div class="mt-5 pt-5 border-top">
+         <h3 class="fw-bold mb-4">Sản phẩm liên quan</h3>
+         <p class="text-muted">Các sản phẩm cùng danh mục sẽ xuất hiện ở đây (Tính năng đang cập nhật).</p>
+    </div>
+</div>
+

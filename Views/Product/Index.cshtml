@@ -1,0 +1,42 @@
+@model IEnumerable<MobileStore.Models.Product>
+
+@{
+    ViewData["Title"] = ViewBag.CurrentCategory;
+}
+
+<div class="container mt-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@ViewBag.CurrentCategory</li>
+        </ol>
+    </nav>
+
+    <h2 class="mb-4 fw-bold">@ViewBag.CurrentCategory</h2>
+    @if (!string.IsNullOrEmpty(ViewBag.SearchQuery))
+    {
+        <p>Kết quả tìm kiếm cho: <strong>@ViewBag.SearchQuery</strong></p>
+    }
+
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+        @foreach (var item in Model)
+        {
+            <div class="col">
+                <div class="card h-100 shadow-sm border-0 product-card">
+                     <div class="position-relative">
+                        <img src="@item.ImageUrl" class="card-img-top p-4" alt="@item.Name" style="height: 250px; object-fit: contain;">
+                     </div>
+                    <div class="card-body">
+                        <h6 class="card-title fw-bold text-truncate">@item.Name</h6>
+                        <p class="card-text text-muted small">@item.Category?.Name</p>
+                        <h5 class="text-primary fw-bold">@item.Price.ToString("N0") đ</h5>
+                    </div>
+                    <div class="card-footer bg-white border-0 d-grid gap-2 pb-3">
+                         <a asp-controller="Product" asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary rounded-pill">Chi tiết</a>
+                        <a asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@item.Id" class="btn btn-sm btn-primary rounded-pill">Thêm vào giỏ</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

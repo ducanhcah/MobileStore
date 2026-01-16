@@ -1,0 +1,160 @@
+@model IEnumerable<MobileStore.Models.Product>
+
+@{
+    ViewData["Title"] = "Trang chủ";
+    var featuredProducts = Model.Where(p => p.IsFeatured).Take(3);
+    var newArrivals = Model.OrderByDescending(p => p.Id).Take(4);
+}
+
+<!-- Hero Banner -->
+<section class="position-relative overflow-hidden p-5 mb-5 rounded-4 shadow-lg" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); min-height: 500px; display: flex; align-items: center;">
+    <div class="container position-relative z-2">
+        <div class="row align-items-center">
+            <div class="col-lg-6 text-white">
+                <span class="badge bg-warning text-dark mb-3 px-3 py-2 rounded-pill fw-bold">FLAGSHIP SERIES</span>
+                <h1 class="display-3 fw-bold mb-4" style="line-height: 1.2;">Công nghệ tương lai <br><span class="text-warning">Trong tầm tay bạn</span></h1>
+                <p class="lead mb-5 opacity-75">Khám phá bộ sưu tập điện thoại thông minh cao cấp nhất 2024. Đỉnh cao thiết kế, hiệu năng vượt trội.</p>
+                <div class="d-flex gap-3">
+                    <button class="btn btn-warning btn-lg rounded-pill px-5 fw-bold hover-scale" type="button">Mua ngay</button>
+                    <button class="btn btn-outline-light btn-lg rounded-pill px-5 fw-bold hover-scale" type="button">Tìm hiểu thêm</button>
+                </div>
+            </div>
+             <div class="col-lg-6 d-none d-lg-block position-relative">
+                <img src="https://cdn.tgdd.vn/Products/Images/42/305658/iphone-15-pro-max-blue-thumbnew-600x600.jpg" class="img-fluid rounded-4 shadow-lg animate-float" style="transform: rotate(-15deg); margin-left: 50px;" alt="Hero Phone">
+            </div>
+        </div>
+    </div>
+    <!-- Decorative Circle -->
+    <div class="position-absolute top-0 end-0 rounded-circle bg-white opacity-10" style="width: 600px; height: 600px; transform: translate(30%, -30%); blur(100px);"></div>
+</section>
+
+<!-- New Arrivals -->
+<section class="container mb-5">
+    <div class="d-flex justify-content-between align-items-end mb-4">
+        <div>
+            <h6 class="text-uppercase text-secondary fw-bold small ls-1 mb-2">Mới nhất 2024</h6>
+            <h2 class="fw-bold display-6">Sản phẩm mới về</h2>
+        </div>
+        <a asp-controller="Product" asp-action="Index" class="btn btn-outline-dark rounded-pill px-4">Xem tất cả <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+        @foreach (var item in newArrivals)
+        {
+            <div class="col">
+                <div class="card h-100 product-card shadow-sm border-0 position-relative">
+                     @if(item.IsFeatured)
+                    {
+                        <span class="position-absolute top-0 start-0 badge bg-danger m-3 rounded-pill shadow-sm z-2">Hot</span>
+                    }
+                     <span class="position-absolute top-0 end-0 badge bg-success m-3 rounded-pill shadow-sm z-2">New</span>
+                    
+                    <div class="card-img-top p-4 d-flex align-items-center justify-content-center bg-light" style="height: 280px; overflow: hidden;">
+                         <img src="@item.ImageUrl" class="img-fluid" alt="@item.Name" style="max-height: 220px; object-fit: contain;">
+                    </div>
+
+                    <div class="card-body text-center p-4">
+                        <p class="text-muted small text-uppercase fw-bold mb-1">@item.Category?.Name</p>
+                        <h5 class="card-title fw-bold mb-3 text-truncate">@item.Name</h5>
+                        <h4 class="text-primary fw-bold mb-3">@item.Price.ToString("N0") đ</h4>
+                         <a asp-controller="Product" asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-primary rounded-pill w-100 stretched-link">Chi tiết</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+<!-- Features Banner -->
+<section class="container mb-5">
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="p-4 rounded-4 bg-light h-100 d-flex align-items-center">
+                <div class="display-4 text-primary me-3"><i class="bi bi-truck"></i></div>
+                <div>
+                    <h5 class="fw-bold mb-1">Miễn phí vận chuyển</h5>
+                    <p class="text-muted small mb-0">Cho đơn hàng từ 5 triệu</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+             <div class="p-4 rounded-4 bg-light h-100 d-flex align-items-center">
+                <div class="display-4 text-primary me-3"><i class="bi bi-shield-check"></i></div>
+                <div>
+                    <h5 class="fw-bold mb-1">Bảo hành chính hãng</h5>
+                    <p class="text-muted small mb-0">12 tháng Apple, Samsung</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+             <div class="p-4 rounded-4 bg-light h-100 d-flex align-items-center">
+                <div class="display-4 text-primary me-3"><i class="bi bi-credit-card"></i></div>
+                <div>
+                    <h5 class="fw-bold mb-1">Trả góp 0%</h5>
+                    <p class="text-muted small mb-0">Thủ tục đơn giản, nhanh chóng</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Hot Deals (Featured) -->
+<section class="container mb-5">
+     <div class="d-flex justify-content-between align-items-end mb-4">
+        <div>
+            <h6 class="text-uppercase text-danger fw-bold small ls-1 mb-2">Khuyến mãi sốc</h6>
+            <h2 class="fw-bold display-6">Sản phẩm nổi bật</h2>
+        </div>
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach (var item in featuredProducts)
+        {
+            <div class="col">
+                <div class="card h-100 product-card shadow-sm border-0">
+                     <div class="card-img-top p-5 d-flex align-items-center justify-content-center bg-white" style="height: 350px;">
+                        <img src="@item.ImageUrl" class="card-img-top p-4" alt="@item.Name" style="height: 100%; object-fit: contain;">
+                    </div>
+                    <div class="card-body text-center p-4 bg-light-subtle">
+                         <div class="mb-2">
+                             <i class="bi bi-star-fill text-warning"></i>
+                             <i class="bi bi-star-fill text-warning"></i>
+                             <i class="bi bi-star-fill text-warning"></i>
+                             <i class="bi bi-star-fill text-warning"></i>
+                             <i class="bi bi-star-fill text-warning"></i>
+                         </div>
+                        <h4 class="card-title fw-bold">@item.Name</h4>
+                         <p class="text-muted small line-clamp-2 mb-3">@item.Description</p>
+                        <h3 class="text-danger fw-bold mb-4">@item.Price.ToString("N0") đ</h3>
+                        <div class="d-grid gap-2">
+                            <a asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@item.Id" class="btn btn-primary rounded-pill py-2 shadow-sm"><i class="bi bi-cart-plus me-2"></i> Thêm vào giỏ</a>
+                        </div>
+                    </div>
+                     <a asp-controller="Product" asp-action="Details" asp-route-id="@item.Id" class="stretched-link"></a>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+<style>
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+}
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+@@keyframes float {
+	0% {
+		transform: rotate(-15deg) translatey(0px);
+	}
+	50% {
+		transform: rotate(-15deg) translatey(-20px);
+	}
+	100% {
+		transform: rotate(-15deg) translatey(0px);
+	}
+}
+</style>
